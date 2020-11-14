@@ -17,9 +17,9 @@ function App() {
     return (
 		<Contenedor>
 			<Header titulo="Cotizador de seguros" />
-            <ContenedorFormulario>
-                <Formulario />
-            </ContenedorFormulario>
+			<ContenedorFormulario>
+				<Formulario />
+			</ContenedorFormulario>
 		</Contenedor>
 	);
 }
