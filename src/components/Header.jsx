@@ -18,7 +18,7 @@ const TextoHeader = styled.h1`
 const Header = ({ titulo }) => {
 	return (
 		<ContenedorHeader>
-			<TextoHeader>{titulo}</TextoHeader>
+			<TextoHeader>{ titulo }</TextoHeader>
 		</ContenedorHeader>
 	);
 };

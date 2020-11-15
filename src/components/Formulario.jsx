@@ -41,6 +41,15 @@ const Boton = styled.button`
 	}
 `;
 
+const Error = styled.div`
+	width: 100%;
+	color: white;
+	text-align: center;
+	margin-bottom: 2rem;
+	padding: 1rem;
+	background-color: red;
+`;
+
 const Formulario = () => {
 
 	//! guardar datos introducidos. Se podría hacer como variables separadas
@@ -50,20 +59,46 @@ const Formulario = () => {
 		plan: ''
 	})
 
+	//! state error
+	const [error, guardarError] = useState(false)
+
 	//! extraemos datos del state
 	const { marca, year, plan } = datos
 
 	//! leer datos formulario y pasarlos al state
 	const obtenerInformacion = e => {
-		e.preventDefault()
 		guardarDatos({
 			...datos,
 			[e.target.name]: e.target.value,
 		});
 	}
+
+	//! al enviar datos formulario, submit
+	const cotizarSeguro = e => {
+		e.preventDefault()
+
+		if (marca.trim() === "" || year.trim() === "" || plan.trim() === "") {
+			guardarError(true);
+			return;
+		}
+
+		guardarError(false);
+
+		//* obtener diferencia de años
+
+		//* por cada año restar el 3%
+
+		//* americano 15%, asiatico 5%, europeo 30%
+
+		//* basico aumenta 20%, completo 50%
+
+		//* total
+	};
 	
     return (
-		<form>
+		<form onSubmit={cotizarSeguro}>
+			{ error ? <Error>Todos los campos son obligatorios</Error> : null }
+
 			<Campo>
 				<Label>Marca</Label>
 				<Select name="marca" value={marca} onChange={obtenerInformacion}>
@@ -96,7 +131,7 @@ const Formulario = () => {
 				<InputRadio type="radio" name="plan" value="completo" check={plan === "completo"} onChange={obtenerInformacion} />
 				Completo
 			</Campo>
-			<Boton type="button">Cotizar</Boton>
+			<Boton type="submit">Cotizar</Boton>
 		</form>
 	);
 }
