@@ -51,31 +51,30 @@ const Error = styled.div`
 	background-color: red;
 `;
 
-const Formulario = () => {
-
+const Formulario = ({ guardarResumen }) => {
 	//! guardar datos introducidos. Se podría hacer como variables separadas
 	const [datos, guardarDatos] = useState({
-		marca: '',
-		year: '',
-		plan: ''
-	})
+		marca: "",
+		year: "",
+		plan: "",
+	});
 
 	//! state error
-	const [error, guardarError] = useState(false)
+	const [error, guardarError] = useState(false);
 
 	//! extraemos datos del state
-	const { marca, year, plan } = datos
+	const { marca, year, plan } = datos;
 
 	//! leer datos formulario y pasarlos al state
-	const obtenerInformacion = e => {
+	const obtenerInformacion = (e) => {
 		guardarDatos({
 			...datos,
 			[e.target.name]: e.target.value,
 		});
-	}
+	};
 
 	//! al enviar datos formulario, submit
-	const cotizarSeguro = e => {
+	const cotizarSeguro = (e) => {
 		e.preventDefault();
 
 		if (marca.trim() === "" || year.trim() === "" || plan.trim() === "") {
@@ -102,15 +101,19 @@ const Formulario = () => {
 
 		//* basico aumenta 20%, completo 50%
 		resultado = parseFloat(calcularPlan(plan) * resultado).toFixed(2);
-		console.log(resultado);
+		//console.log(resultado);
 
 		//* total
+		guardarResumen({
+			cotizacion: resultado,
+			datos
+		})
 
 	};
-	
-    return (
+
+	return (
 		<form onSubmit={cotizarSeguro}>
-			{ error ? <Error>Todos los campos son obligatorios</Error> : null }
+			{error ? <Error>Todos los campos son obligatorios</Error> : null}
 
 			<Campo>
 				<Label>Marca</Label>
@@ -147,6 +150,6 @@ const Formulario = () => {
 			<Boton type="submit">Cotizar</Boton>
 		</form>
 	);
-}
+};
  
 export default Formulario;
