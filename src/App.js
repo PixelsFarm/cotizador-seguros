@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Header from "./components/Header";
 import Formulario from "./components/Formulario";
 import Resumen from "./components/Resumen";
+import Resultado from "./components/Resultado";
 import styled from "@emotion/styled";
 
 const Contenedor = styled.div`
@@ -26,7 +27,7 @@ function App() {
 	})
 
 	//! extraer parte objeto datos del state resumen
-	const { datos } = resumen 
+	const { datos, cotizacion } = resumen 
 
     return (
 		<Contenedor>
@@ -37,6 +38,9 @@ function App() {
 				/>
 				<Resumen 
 					datos={datos}
+				/>
+				<Resultado 
+					cotizacion={cotizacion}
 				/>
 			</ContenedorFormulario>
 		</Contenedor>

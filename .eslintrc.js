@@ -15,5 +15,6 @@ module.exports = {
 	rules: {
 		"no-unused-vars": "off",
 		"react/prop-types": "off",
+		"react/jsx-max-props-per-line": [{ "maximum": 1, "when": "multiline" }]
 	},
 };
