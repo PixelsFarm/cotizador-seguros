@@ -23,3 +23,8 @@ export function calcularMarca(marca) {
 
     return incremento
 }
+
+//! calcula coste basado en el plan
+export function calcularPlan(plan) {
+    return plan ==='basico' ? 1.20 : 1.50
+}
