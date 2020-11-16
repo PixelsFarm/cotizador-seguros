@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import Formulario from "./components/Formulario";
 import Resumen from "./components/Resumen";
 import Resultado from "./components/Resultado";
+import Spinner from "./components/Spinner";
 import styled from "@emotion/styled";
 
 const Contenedor = styled.div`
@@ -26,6 +27,8 @@ function App() {
 		}
 	})
 
+	const [cargando, guardarCargando] = useState(false)
+
 	//! extraer parte objeto datos del state resumen
 	const { datos, cotizacion } = resumen 
 
@@ -33,15 +36,13 @@ function App() {
 		<Contenedor>
 			<Header titulo="Cotizador de seguros" />
 			<ContenedorFormulario>
-				<Formulario 
-					guardarResumen={guardarResumen}
-				/>
-				<Resumen 
-					datos={datos}
-				/>
-				<Resultado 
-					cotizacion={cotizacion}
-				/>
+				<Formulario guardarResumen={guardarResumen} guardarCargando={guardarCargando} />
+
+				{cargando ? <Spinner /> : null}
+
+				<Resumen datos={datos} />
+
+				{!cargando ? <Resultado cotizacion={cotizacion} /> : null}
 			</ContenedorFormulario>
 		</Contenedor>
 	);

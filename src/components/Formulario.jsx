@@ -51,7 +51,7 @@ const Error = styled.div`
 	background-color: red;
 `;
 
-const Formulario = ({ guardarResumen }) => {
+const Formulario = ({ guardarResumen, guardarCargando }) => {
 	//! guardar datos introducidos. Se podría hacer como variables separadas
 	const [datos, guardarDatos] = useState({
 		marca: "",
@@ -103,11 +103,21 @@ const Formulario = ({ guardarResumen }) => {
 		resultado = parseFloat(calcularPlan(plan) * resultado).toFixed(2);
 		//console.log(resultado);
 
-		//* total
-		guardarResumen({
-			cotizacion: resultado,
-			datos
-		})
+		guardarCargando(true)
+
+		setTimeout(() => {
+			
+			//* total
+			guardarResumen({
+				cotizacion: resultado,
+				datos,
+			});
+
+			guardarCargando(false);
+
+		}, 3000);
+		
+		
 
 	};
 
